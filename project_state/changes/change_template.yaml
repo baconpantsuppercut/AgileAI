@@ -1,0 +1,44 @@
+id: 0
+
+title: example change
+
+status: planned
+
+owner:
+  type: ai
+  name: agent
+
+sprintathon_id: 1
+
+summary: >
+  Describe the change here.
+
+dependencies:
+  required: []
+  recommended: []
+
+scope:
+  services: []
+  paths: []
+  migrations: false
+
+risk:
+  level: low
+  touches_public_api: false
+  touches_database_schema: false
+  touches_auth: false
+
+verification:
+  ci_required: true
+  ai_review_required: true
+  human_verification_required: true
+  human_verification_status: pending
+
+review:
+  ai_review_status: pending
+  code_review_status: pending
+
+timestamps:
+  created_at: null
+  started_at: null
+  updated_at: null

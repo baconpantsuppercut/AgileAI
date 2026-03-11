@@ -1,0 +1,36 @@
+protocol: adsp
+protocol_version: 0.1
+
+project:
+  name: repository
+  default_branch: main
+
+repo_state:
+  status: active
+  max_parallel_changes: 4
+
+schema:
+  database_schema_version: 1
+
+services:
+  api: active
+  worker: active
+  web: active
+
+completed_changes: []
+
+active_changes: []
+
+scope_locks:
+  migrations: null
+  services:
+    api: null
+    worker: null
+    web: null
+
+verification_queue: []
+
+ai_features:
+  prompts: true
+  feedback: true
+  audit_log: true

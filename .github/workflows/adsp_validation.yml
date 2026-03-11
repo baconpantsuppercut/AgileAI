@@ -1,0 +1,18 @@
+name: ADSP Validation
+
+on:
+  pull_request:
+
+jobs:
+  validate-adsp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate ADSP project state files
+        run: |
+          test -f project_state/state.yaml
+          test -f project_state/schema_version.txt
+          test -f project_state/sprintathon.yaml
+          test -d project_state/changes
