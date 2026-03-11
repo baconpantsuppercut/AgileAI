@@ -52,6 +52,46 @@ Typical lifecycle for a change record:
 
 Statuses can be represented in each change file and summarized in `project_state/state.yaml`.
 
+## Architectural guidance for parallel AI delivery
+
+Parallel AI development is not only a workflow problem; it is also an architecture problem.
+
+If multiple changes repeatedly collide in the same file (for example a large HTTP handler), treat that as a refactoring signal. In practice, merge conflicts often emerge when one file aggregates many unrelated responsibilities.
+
+### Hotspot anti-pattern
+
+Avoid single "do-everything" handler files such as:
+
+- `internal/api/cases/cases_handler.go`
+
+that combine responsibilities like:
+
+- portal responses,
+- payments,
+- messaging,
+- case management logic,
+- AI-specific orchestration.
+
+In parallel branch execution, this creates a hotspot where independent features must touch the same lines.
+
+### AI-native modular handler pattern
+
+Prefer responsibility-sliced handlers so independent changes can land independently, for example:
+
+- `internal/api/cases/cases_handler.go` (core wiring / shared primitives)
+- `internal/api/cases/cases_messages_handler.go`
+- `internal/api/cases/cases_portal_handler.go`
+- `internal/api/cases/cases_payments_handler.go`
+- `internal/api/cases/cases_ai_handler.go`
+
+### Emerging rule
+
+Parallel AI changes are generally safe **when architecture minimizes hotspot files**.
+
+Operational rule for Agile AI execution:
+
+> If merge conflicts repeatedly occur in one file, treat that file as a candidate for decomposition into smaller modules before scaling parallel AI change throughput.
+
 ## How AI agents should read state before modifying code
 
 Before any code edits, AI agents should:
