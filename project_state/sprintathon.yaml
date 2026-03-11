@@ -1,0 +1,15 @@
+sprintathon:
+  id: 1
+  name: initial setup
+  status: active
+
+window:
+  starts_at: 2026-03-11
+  ends_at: 2026-04-11
+
+rules:
+  max_parallel_changes: 4
+  require_ci_green_before_merge: true
+  require_human_verification_before_merge: true
+
+changes: []
