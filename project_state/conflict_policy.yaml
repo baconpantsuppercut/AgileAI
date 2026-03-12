@@ -1,0 +1,37 @@
+policy_version: 0.1
+
+description: >
+  Conflict policy for parallel AI-driven development.
+  Defines rules for high-risk resources that require coordination
+  between multiple AI agents or developers.
+
+resources:
+
+  migrations:
+    strategy: single-writer
+    description: >
+      Only one active change may produce database migrations at a time.
+      This prevents schema conflicts during parallel development.
+
+    lock_name: migrations
+    require_schema_version_increment: true
+    conflict_resolution: block
+
+  environment_variables:
+    strategy: review-required
+    description: >
+      Changes to environment variables require additional review
+      because they affect runtime configuration across services.
+
+    require_documentation: true
+    require_ci_validation: true
+    conflict_resolution: manual-review
+
+  hotspot_files:
+    strategy: refactor-on-conflict
+    description: >
+      If repeated merge conflicts occur in a file, the file should
+      be refactored into smaller modules to support parallel AI development.
+
+    detection_rule: repeated_merge_conflicts
+    resolution_action: suggest_refactor
