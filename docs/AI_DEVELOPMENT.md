@@ -92,3 +92,16 @@ Use the template to create a new change record:
 5. Open a pull request and keep verification fields current during review.
 
 This process ensures each unit of work is visible, attributable, and verifiable.
+
+## Conflict Policy
+
+Parallel AI development can introduce conflicts when multiple agents modify shared resources.
+
+The file `project_state/conflict_policy.yaml` defines machine-readable rules that AI agents must follow when modifying high-risk resources such as:
+
+- database migrations
+- environment variables
+- hotspot files
+
+This policy exists to prevent merge conflicts and configuration errors during parallel development.
+

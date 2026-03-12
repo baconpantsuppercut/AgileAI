@@ -15,4 +15,5 @@ jobs:
           test -f project_state/state.yaml
           test -f project_state/schema_version.txt
           test -f project_state/sprintathon.yaml
+          test -f project_state/conflict_policy.yaml
           test -d project_state/changes
